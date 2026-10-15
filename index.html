@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nasse Biology - 3D İnteraktif Biyoloji Oyun & Eğitim Platformu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0B132B',
+                            900: '#070A13',
+                            950: '#030509',
+                        },
+                        emerald: {
+                            400: '#34D399',
+                            500: '#10B981',
+                            600: '#059669',
+                        },
+                        sky: {
+                            400: '#38BDF8',
+                            500: '#0EA5E9',
+                            600: '#0284C7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bg-mesh {
+            background-color: #030509;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(5, 150, 105, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(2, 132, 199, 0.3) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(11, 19, 43, 0.95) 0px, transparent 50%);
+        }
+        .glass-panel {
+            background: rgba(11, 19, 43, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+        }
+        .glass-panel-hover:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 35px rgba(14, 165, 233, 0.25);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 1rem;
+            border: none;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.9; }
+        }
+        .animate-glow {
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030509;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #059669;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-mesh text-slate-100 min-h-screen font-sans selection:bg-emerald-500 selection:text-white flex flex-col justify-between">
+
+    <!-- ANA UYGULAMA İÇERİĞİ -->
+    <div id="main-app" class="flex flex-col min-h-screen">
+        
+        <!-- HEADER / ÜST BİLGİ VE SKOR PANOLARI -->
+        <header class="glass-panel sticky top-0 z-40 border-b border-emerald-500/20 px-4 md:px-8 py-4 shadow-2xl">
+            <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-sky-500 flex items-center justify-center font-black text-navy-950 text-2xl shadow-lg shadow-emerald-500/40 animate-pulse">
+                        N
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-sky-400 tracking-tight">
+                            Nasse Biology
+                        </h1>
+                        <div class="flex items-center gap-2 text-xs font-semibold text-sky-300 mt-0.5">
+                            <span class="bg-sky-950/80 px-2.5 py-0.5 rounded-md border border-sky-500/30">-Los Galacticos-</span>
+                            <span class="text-emerald-400">•</span>
+                            <span class="bg-emerald-950/80 px-2.5 py-0.5 rounded-md border border-emerald-500/30">-Barış Köseoğlu-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OYUN SKORU VE UNVAN BAR SİSTEMİ -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="bg-navy-900 border border-emerald-500/40 px-4 py-2 rounded-2xl flex items-center gap-3 shadow-inner">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Unvan:</span>
+                        <span id="player-title" class="text-sky-400 font-black text-xs bg-sky-950 px-2 py-1 rounded-lg border border-sky-500/30">Çaylak Biyolog</span>
+                    </div>
+                    <div class="bg-navy-900 border border-emerald-500/40 px-4 py-2 rounded-2xl flex items-center gap-3 shadow-inner">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Skor / XP:</span>
+                        <span id="global-score" class="text-emerald-400 font-black text-lg">0 XP</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ROZETLER / BAŞARIM ŞERİDİ -->
+        <div class="bg-navy-950/90 border-b border-slate-800/80 py-2 px-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between text-xs overflow-x-auto gap-4">
+                <span class="font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap">🏆 Rozetlerin:</span>
+                <div class="flex items-center gap-2">
+                    <span id="badge-1" class="opacity-40 grayscale bg-navy-900 border border-slate-700 px-3 py-1 rounded-xl flex items-center gap-1.5 transition-all">🧬 Hücre Kaşifi</span>
+                    <span id="badge-2" class="opacity-40 grayscale bg-navy-900 border border-slate-700 px-3 py-1 rounded-xl flex items-center gap-1.5 transition-all">⚡ Enerji Ustası</span>
+                    <span id="badge-3" class="opacity-40 grayscale bg-navy-900 border border-slate-700 px-3 py-1 rounded-xl flex items-center gap-1.5 transition-all">🧠 Nöron Profesörü</span>
+                    <span id="badge-4" class="opacity-40 grayscale bg-navy-900 border border-slate-700 px-3 py-1 rounded-xl flex items-center gap-1.5 transition-all">🌐 Biyoloji Efsanesi</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- KADEMELER VE SEKME MENÜSÜ -->
+        <nav class="bg-navy-900/90 border-b border-slate-800 px-4 py-3 sticky top-[81px] z-30 backdrop-blur-md shadow-md">
+            <div class="max-w-7xl mx-auto flex items-center justify-start md:justify-center gap-3 overflow-x-auto py-1">
+                <button onclick="switchTab('sinif-9')" id="tab-sinif-9" class="tab-btn px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-900/50 scale-105">
+                    🧬 9. Sınıf: Hücre & Taşımalar
+                </button>
+                <button onclick="switchTab('sinif-10')" id="tab-sinif-10" class="tab-btn px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 whitespace-nowrap bg-navy-800 text-slate-300 hover:text-white hover:bg-slate-800">
+                    🔬 10. Sınıf: ATP & Solunum
+                </button>
+                <button onclick="switchTab('sinif-11')" id="tab-sinif-11" class="tab-btn px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 whitespace-nowrap bg-navy-800 text-slate-300 hover:text-white hover:bg-slate-800">
+                    ⚡ 11. Sınıf: Nöron, MSS & İmpuls
+                </button>
+                <button onclick="switchTab('baglam')" id="tab-baglam" class="tab-btn px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 whitespace-nowrap bg-navy-800 text-slate-300 hover:text-white hover:bg-slate-800">
+                    🌐 Bağlam Temelli Simülasyon
+                </button>
+            </div>
+        </nav>
+
+        <!-- İÇERİK ALANLARI -->
+        <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-8 space-y-6">
+            
+            <!-- 9. SINIF MODÜLÜ -->
+            <section id="content-sinif-9" class="space-y-6">
+                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-emerald-500/30 relative overflow-hidden">
+                    <div class="absolute -right-32 -top-32 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none animate-glow"></div>
+
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-950/80 px-3 py-1.5 rounded-xl border border-emerald-500/30">9. Sınıf Maarif Modeli</span>
+                            <h2 class="text-3xl md:text-4xl font-black text-white mt-3">Hücre Yapısı, Zar Anatomisi & Madde Taşımaları</h2>
+                            <p class="text-slate-300 text-sm mt-1 max-w-2xl">Hayvan hücresi 3D modeli üzerinde organelleri inceleyin; aktif ve pasif taşıma mekanizmalarını öğrenin.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- 3D Model Container -->
+                        <div class="lg:col-span-2 h-[520px] glass-panel rounded-2xl overflow-hidden relative border border-slate-700/80 shadow-2xl glass-panel-hover">
+                            <iframe title="Animal Cell 2.0 Annotated" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/0d9f7f4257224975b2ef83a283709b2f/embed?autostart=1&ui_controls=1&ui_infos=0"></iframe>
+                            <div class="absolute bottom-4 left-4 bg-navy-950/90 backdrop-blur-md px-4 py-2 rounded-xl text-xs text-emerald-300 border border-emerald-500/30 shadow-lg pointer-events-none">
+                                🔍 3D Hücre Modeli: Dokunarak Yakınlaştırın, Döndürün ve İnceleyin
+                            </div>
+                        </div>
+
+                        <!-- Detaylı Konu Anlatımı ve Quiz -->
+                        <div class="space-y-4 flex flex-col justify-between">
+                            <div class="glass-panel p-5 rounded-2xl border border-slate-700/80 space-y-3">
+                                <h3 class="text-base font-bold text-emerald-400 flex items-center gap-2">
+                                    <span>🔬</span> Kapsamlı Konu Özeti
+                                </h3>
+                                <div class="space-y-2 text-xs text-slate-300 leading-relaxed max-h-[220px] overflow-y-auto pr-2">
+                                    <p><strong class="text-sky-300">Akıcı Mozaik Zar Modeli:</strong> Çift katlı fosfolipit tabakası, aralara gömülmüş kanal proteinleri ve glikoproteinlerden oluşur.</p>
+                                    <p><strong class="text-sky-300">Pasif Taşıma:</strong> Difüzyon ve ozmoz. ATP harcanmaz, çok yoğun ortamdan az yoğuna doğru gerçekleşir.</p>
+                                    <p><strong class="text-sky-300">Aktif Taşıma:</strong> Az yoğun ortamdan çok yoğuna taşıma. Taşıyıcı proteinler ve ATP harcaması şarttır (örneğin Na+/K+ pompası).</p>
+                                    <p><strong class="text-sky-300">Endositoz & Egzositoz:</strong> Büyük moleküllerin koful oluşturarak hücre içine alınması veya dışarı atılmasıdır.</p>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Quiz Arena 9 -->
+                            <div class="glass-panel p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 rounded-2xl space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">🎮 9. Sınıf Quiz Arena</h4>
+                                    <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">+20 XP</span>
+                                </div>
+                                <p id="q9-text" class="text-xs text-slate-200">Hücre zarında glikoprotein ve glikolipit moleküllerinin temel biyolojik görevi nedir?</p>
+                                <div id="q9-options" class="space-y-2">
+                                    <button onclick="answerQuiz(9, true, 'badge-1')" class="w-full text-left bg-navy-900 hover:bg-emerald-900/50 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">A) Hücreye özgüllük kazandırmak ve hücrelerin birbirini tanımasını sağlamak</button>
+                                    <button onclick="answerQuiz(9, false, null)" class="w-full text-left bg-navy-900 hover:bg-red-900/30 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">B) Sadece ATP üretmek ve hücreye enerji sağlamak</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. SINIF MODÜLÜ -->
+            <section id="content-sinif-10" class="hidden space-y-6">
+                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-sky-500/30 relative overflow-hidden">
+                    <div class="absolute -right-32 -top-32 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none animate-glow"></div>
+
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div>
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest bg-sky-950/80 px-3 py-1.5 rounded-xl border border-sky-500/30">10. Sınıf Maarif Modeli</span>
+                            <h2 class="text-3xl md:text-4xl font-black text-white mt-3">ATP Yapısı, Hücresel Enerji & Solunum Evreleri</h2>
+                            <p class="text-slate-300 text-sm mt-1 max-w-2xl">Sinir hücrelerinin kesintisiz çalışması için gerekli ATP üretimi, oksijenli solunum evreleri ve fermantasyon.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="glass-panel p-6 rounded-2xl border border-slate-700/80 space-y-4">
+                            <h3 class="text-lg font-bold text-sky-400">⚡ ATP ve Solunumun Detaylı Mekanizması</h3>
+                            <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
+                                <p><strong class="text-emerald-400">ATP Molekülü:</strong> Adenin bazı, 5 karbonlu Riboz şekeri ve 3 adet yüksek enerjili fosfat bağından oluşur.</p>
+                                <p><strong class="text-emerald-400">Oksijenli Solunum (O2'li):</strong> 
+                                    <br>1. <i>Glikoliz:</i> Sitoplazmada glikozun pirüvata kadar yıkılması (2 ATP net).
+                                    <br>2. <i>Krebs Döngüsü:</i> Mitokondri matriksinde CO2 çıkışı ve FADH2/NADH üretimi.
+                                    <br>3. <i>ETS (Elektron Taşıma Sistemi):</i> Mitokondri kristasında oksijen kullanılarak maksimum ATP üretimi.
+                                </p>
+                                <p><strong class="text-emerald-400">Nöronların Hassasiyeti:</strong> Nöronlar sadece glikoz ve O2 kullanarak enerji üretir. Oksijensizliğe 3-5 dakikadan fazla dayanamazlar.</p>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Arena 10 -->
+                        <div class="glass-panel p-6 rounded-2xl border border-sky-500/30 bg-sky-950/20 space-y-3 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider">🎮 10. Sınıf Quiz Arena</h4>
+                                    <span class="text-[10px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded">+30 XP</span>
+                                </div>
+                                <p id="q10-text" class="text-xs text-slate-200 mb-3">Oksijenli solunumun hangi evresi tüm canlılarda ortak olarak sitoplazmada gerçekleşir?</p>
+                            </div>
+                            <div id="q10-options" class="space-y-2">
+                                <button onclick="answerQuiz(10, true, 'badge-2')" class="w-full text-left bg-navy-900 hover:bg-sky-900/50 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">A) Glikoliz Evresi</button>
+                                <button onclick="answerQuiz(10, false, null)" class="w-full text-left bg-navy-900 hover:bg-red-900/30 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">B) Elektron Taşıma Sistemi (ETS)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. SINIF MAARİF MODELİ MODÜLÜ -->
+            <section id="content-sinif-11" class="hidden space-y-6">
+                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-emerald-500/30 relative overflow-hidden">
+                    <div class="absolute -right-32 -bottom-32 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none animate-glow"></div>
+
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-950/80 px-3 py-1.5 rounded-xl border border-emerald-500/30">11. Sınıf Maarif Modeli</span>
+                            <h2 class="text-3xl md:text-4xl font-black text-white mt-3">Nöron Yapısı, Reseptörler, MSS & İmpuls İletimi</h2>
+                            <p class="text-slate-300 text-sm mt-1 max-w-2xl">Beyin anatomisi, omurilik, reseptör çeşitleri, zar potansiyeli (-70mV), nörotransmitterler ve glia hücreleri.</p>
+                        </div>
+                    </div>
+
+                    <!-- 3D Modeller Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <!-- Nöron 3D -->
+                        <div class="h-[400px] glass-panel rounded-2xl overflow-hidden relative border border-slate-700/80 shadow-2xl glass-panel-hover">
+                            <iframe title="Neuron 3D Model" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/d2a2dedec2f846cf9a04cb1969e40782/embed?autostart=1&ui_controls=1&ui_infos=0"></iframe>
+                            <div class="absolute top-3 left-3 bg-navy-950/90 px-3 py-1 rounded-lg text-xs font-bold text-emerald-400 border border-emerald-500/30">
+                                Nöron Yapısı & Miyelin Kılıf (3D)
+                            </div>
+                        </div>
+
+                        <!-- Beyin 3D -->
+                        <div class="h-[400px] glass-panel rounded-2xl overflow-hidden relative border border-slate-700/80 shadow-2xl glass-panel-hover">
+                            <iframe title="Human Brain Cerebrum Brainstem" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/0aa0e33c5c854d1bab7bac9e1c7acaec/embed?autostart=1&ui_controls=1&ui_infos=0"></iframe>
+                            <div class="absolute top-3 left-3 bg-navy-950/90 px-3 py-1 rounded-lg text-xs font-bold text-sky-400 border border-sky-500/30">
+                                İnsan Beyni & MSS (3D)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detaylı Konu Kartları 11 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="glass-panel p-4 rounded-xl border border-slate-700/80 space-y-2">
+                            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wide">🧠 Merkezi Sinir Sistemi (MSS)</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                • <strong>Uç Beyin:</strong> İstemli hareketler, zeka, hafıza.<br>
+                                • <strong>Ara Beyin:</strong> Talamus (duyu duyuları) & Hipotalamus (homeostazi, uyku, vücut ısısı).<br>
+                                • <strong>Beyincik:</strong> Denge ve kas koordinasyonu.<br>
+                                • <strong>Omurilik Soğanı:</strong> Solunum, dolaşım, yutma refleksleri.<br>
+                                • <strong>Omurilik:</strong> Alışkanlık hareketleri ve refleks yayı.
+                            </p>
+                        </div>
+
+                        <div class="glass-panel p-4 rounded-xl border border-slate-700/80 space-y-2">
+                            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wide">⚡ Reseptör & Glia Hücreleri</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                • <strong>Reseptörler:</strong> Kemoreseptör, Mekanoreseptör, Termoreseptör, Ağrı ve Fotoreseptör.<br>
+                                • <strong>Glia Hücreleri:</strong>
+                                <br>- <i>Oligodendrosit:</i> MSS miyelin kılıfı.
+                                <br>- <i>Schwann:</i> ÇSB miyelin kılıfı.
+                                <br>- <i>Mikroglia:</i> Bağışıklık/Fagositoz.
+                                <br>- <i>Astrosit:</i> Kan-beyin bariyeri.
+                            </p>
+                        </div>
+
+                        <div class="glass-panel p-4 rounded-xl border border-slate-700/80 space-y-2">
+                            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wide">🧪 Zar Potansiyeli & Sinaps</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                • <strong>Polarizasyon:</strong> Dinlenme potansiyeli (-70mV). Na+ dışarıda, K+ içeride.<br>
+                                • <strong>Depolarizasyon:</strong> Na+ kapıları açılır, Na+ içeri dolar (+40mV).<br>
+                                • <strong>Repolarizasyon:</strong> K+ kapıları açılır, K+ dışarı çıkar.<br>
+                                • <strong>Nörotransmitterler:</strong> Serotonin, Dopamin, Epinefrin, Norepinefrin.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Arena 11 -->
+                    <div class="glass-panel p-6 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">🎮 11. Sınıf Quiz Arena</h4>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">+40 XP</span>
+                        </div>
+                        <p id="q11-text" class="text-xs text-slate-200">Nöronda depolarizasyon gerçekleşirken zar üzerinde meydana gelen temel elektriksel ve iyonik değişim nedir?</p>
+                        <div id="q11-options" class="space-y-2">
+                            <button onclick="answerQuiz(11, true, 'badge-3')" class="w-full text-left bg-navy-900 hover:bg-emerald-900/50 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">A) Na+ kapıları açılır, Na+ hücre içine hızla girer ve hücre içi pozitifleşir</button>
+                            <button onclick="answerQuiz(11, false, null)" class="w-full text-left bg-navy-900 hover:bg-red-900/30 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">B) K+ kapıları açılır ve hücre içi -90mV seviyesine düşer</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BAĞLAM TEMELLİ SON AŞAMA -->
+            <section id="content-baglam" class="hidden space-y-6">
+                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-sky-500/40 relative overflow-hidden">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="max-w-3xl mb-6">
+                        <span class="text-xs font-bold text-sky-400 uppercase tracking-widest bg-sky-950/80 px-3 py-1.5 rounded-xl border border-sky-500/30">Disiplinlerarası Entegrasyon</span>
+                        <h2 class="text-3xl md:text-4xl font-black text-white mt-3">Bağlam Temelli Biyoloji Simülasyonu</h2>
+                        <p class="text-slate-300 text-sm mt-1">9, 10 ve 11. sınıf kazanımlarını; hücre yapısı, hücresel solunum, MSS ve impuls iletimi bağlamında birleştirerek vaka analizlerini çözün.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div class="glass-panel p-6 rounded-2xl border border-slate-700/80 space-y-4 hover:border-emerald-500/50 transition shadow-xl">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">⚡</span>
+                                <h3 class="text-lg font-bold text-emerald-400">Vaka 1: Maraton Koşucusunun Nöronal Enerjisi</h3>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Uzun mesafe koşan bir atletin beyin motor nöronları ve kas hücreleri kesintisiz impuls üretir. Mitokondride artan hücresel solunum hızı, Na+/K+ pompasının ihtiyaç duyduğu ATP'yi sağlar.
+                            </p>
+                            <div class="pt-2">
+                                <button onclick="completeScenario(1)" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs transition shadow-lg shadow-emerald-950/40">
+                                    Vakayı İncele & Çöz (+50 XP)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-2xl border border-slate-700/80 space-y-4 hover:border-sky-500/50 transition shadow-xl">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">🧪</span>
+                                <h3 class="text-lg font-bold text-sky-400">Vaka 2: Ani Stres ve Refleks Tepkisi</h3>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Ani bir tehlike anında omurilik refleks yayı devreye girerek motor nöronlarla kasları hızla kasar. Eş zamanlı olarak epinefrin/norepinefrin salgılanır ve beyin korteksinde bilinçli algı oluşur.
+                            </p>
+                            <div class="pt-2">
+                                <button onclick="completeScenario(2)" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 rounded-xl text-xs transition shadow-lg shadow-sky-950/40">
+                                    Vakayı İncele & Çöz (+50 XP)
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER / ALT BİLGİ -->
+        <footer class="glass-panel border-t border-emerald-500/20 py-8 text-center text-xs text-slate-400 mt-12">
+            <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="font-black text-emerald-400 text-sm">Nasse Biology</span>
+                    <span class="text-slate-600">•</span>
+                    <span class="text-sky-300 font-semibold">-Los Galacticos-</span>
+                    <span class="text-slate-600">•</span>
+                    <span class="text-emerald-300 font-semibold">-Barış Köseoğlu-</span>
+                </div>
+                <p class="text-slate-500">Biyoloji Eğitimi için Etkileşimli 3D Oyun Platformu &copy; 2026</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JAVASCRIPT / SKOR VE ETKİLEŞİM MANTIĞI -->
+    <script>
+        let totalScore = 0;
+
+        function updateScore(points) {
+            totalScore += points;
+            document.getElementById('global-score').innerText = totalScore + " XP";
+            
+            // Unvan Güncelleme
+            const titleElem = document.getElementById('player-title');
+            if (totalScore >= 120) {
+                titleElem.innerText = "Biyoloji Efsanesi 👑";
+                titleElem.className = "text-amber-400 font-black text-xs bg-amber-950 px-2 py-1 rounded-lg border border-amber-500/40 animate-pulse";
+            } else if (totalScore >= 70) {
+                titleElem.innerText = "Nöron Profesörü 🧠";
+                titleElem.className = "text-emerald-400 font-black text-xs bg-emerald-950 px-2 py-1 rounded-lg border border-emerald-500/40";
+            } else if (totalScore >= 30) {
+                titleElem.innerText = "Enerji Ustası ⚡";
+                titleElem.className = "text-sky-400 font-black text-xs bg-sky-950 px-2 py-1 rounded-lg border border-sky-500/40";
+            }
+        }
+
+        function unlockBadge(badgeId) {
+            if(badgeId) {
+                const badge = document.getElementById(badgeId);
+                if(badge) {
+                    badge.classList.remove('opacity-40', 'grayscale');
+                    badge.classList.add('border-emerald-500', 'bg-emerald-950/80', 'text-emerald-300', 'shadow-md');
+                }
+            }
+        }
+
+        // SEKME DEĞİŞTİRME MEKANİZMASI
+        function switchTab(tabId) {
+            document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
+            
+            const targetSection = document.getElementById('content-' + tabId);
+            if(targetSection) targetSection.classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 whitespace-nowrap bg-navy-800 text-slate-300 hover:text-white hover:bg-slate-800";
+            });
+
+            const activeBtn = document.getElementById('tab-' + tabId);
+            if(activeBtn) {
+                if(tabId === 'baglam') {
+                    activeBtn.className = "tab-btn px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 whitespace-nowrap bg-sky-600 text-white shadow-lg shadow-sky-900/50 scale-105";
+                } else {
+                    activeBtn.className = "tab-btn px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-900/50 scale-105";
+                }
+            }
+        }
+
+        // QUIZ CEVAPLAYICI
+        function answerQuiz(level, isCorrect, badgeId) {
+            if(isCorrect) {
+                const points = level === 9 ? 20 : (level === 10 ? 30 : 40);
+                updateScore(points);
+                unlockBadge(badgeId);
+                alert("🎉 TEBRİKLER! Doğru Cevap.\n\n+" + points + " XP Kazandınız!\nYeni Skorunuz: " + totalScore + " XP");
+            } else {
+                alert("❌ YANLIŞ CEVAP!\n\nKonu özetini tekrar okuyup yeniden deneyin.");
+            }
+        }
+
+        // SENARYO TAMAMLAYICI
+        function completeScenario(id) {
+            updateScore(50);
+            unlockBadge('badge-4');
+            alert("🌐 TEBRİKLER! " + id + ". Senaryo Analizini Başarıyla Tamamladınız!\n\n+50 XP Kazandınız!");
+        }
+    </script>
+</body>
+</html>
