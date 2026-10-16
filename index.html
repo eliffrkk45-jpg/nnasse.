@@ -150,32 +150,22 @@
             <!-- 9. SINIF MODÜLÜ -->
             <section id="content-sinif-9" class="space-y-6">
                 <div class="glass-panel p-6 md:p-8 rounded-3xl border border-emerald-500/30 relative overflow-hidden">
-                    <div class="absolute -right-32 -top-32 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none animate-glow"></div>
-
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                         <div>
                             <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-950/80 px-3 py-1.5 rounded-xl border border-emerald-500/30">9. Sınıf Maarif Modeli</span>
                             <h2 class="text-3xl md:text-4xl font-black text-white mt-3">Hücre Yapısı, Organeller ve Hücre Zarı</h2>
-                            <p class="text-slate-300 text-sm mt-1 max-w-2xl">Hayvan hücresi 3D modeli üzerinde organelleri inceleyin, seçici geçirgen zar mekanizmalarını öğrenin.</p>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <!-- 3D Model Container -->
-                        <div class="lg:col-span-2 h-[520px] glass-panel rounded-2xl overflow-hidden relative border border-slate-700/80 shadow-2xl glass-panel-hover">
-                            <iframe title="Animal Cell 2.0 Annotated" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/0d9f7f4257224975b2ef83a283709b2f/embed?autostart=1&ui_controls=1&ui_infos=0"></iframe>
-                            <div class="absolute bottom-4 left-4 bg-navy-950/90 backdrop-blur-md px-4 py-2 rounded-xl text-xs text-emerald-300 border border-emerald-500/30 shadow-lg pointer-events-none">
-                                🔍 3D Hücre Modeli: Dokunarak Yakınlaştırın, Döndürün ve İnceleyin
-                            </div>
+                        <div class="lg:col-span-2 h-[520px] glass-panel rounded-2xl overflow-hidden relative border border-slate-700/80 shadow-2xl">
+                            <iframe title="Animal Cell 2.0 Annotated" src="https://sketchfab.com/models/0d9f7f4257224975b2ef83a283709b2f/embed?autostart=1&ui_controls=1&ui_infos=0"></iframe>
                         </div>
 
-                        <!-- Detaylı Konu Anlatımı (En az 5 Cümle) -->
                         <div class="space-y-4 flex flex-col justify-between">
                             <div class="glass-panel p-5 rounded-2xl border border-slate-700/80 space-y-3">
-                                <h3 class="text-base font-bold text-emerald-400 flex items-center gap-2">
-                                    <span>🔬</span> Detaylı Konu Anlatımı (5 Cümle)
-                                </h3>
-                                <div class="space-y-2 text-xs text-slate-300 leading-relaxed max-h-[260px] overflow-y-auto pr-2">
+                                <h3 class="text-base font-bold text-emerald-400">🔬 Detaylı Konu Anlatımı (5 Cümle)</h3>
+                                <div class="space-y-2 text-xs text-slate-300 leading-relaxed max-h-[240px] overflow-y-auto pr-2">
                                     <p><strong class="text-sky-300">1. Akıcı Mozaik Zar Modeli:</strong> Hücre zarı, çift katlı fosfolipit tabakasından ve aralara gömülmüş hareketli protein moleküllerinden oluşan dinamik bir yapıdır.</p>
                                     <p><strong class="text-sky-300">2. Seçici Geçirgenlik Özelliği:</strong> Zar, hücre içine girecek ve çıkacak maddeleri molekül büyüklüğü, yükü ve çözünürlüğüne göre seçerek homeostaziyi korur.</p>
                                     <p><strong class="text-sky-300">3. Pasif Taşıma Mekanizmaları:</strong> Difüzyon ve ozmoz olaylarında maddeler çok yoğun ortamdan az yoğun ortama doğru hücresel enerji (ATP) harcanmadan kendiliğinden geçer.</p>
@@ -184,62 +174,39 @@
                                 </div>
                             </div>
 
-                            <!-- Interactive Quiz Arena 9 -->
-                            <div class="glass-panel p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 rounded-2xl space-y-3">
+                            <div id="quiz-box-9" class="glass-panel p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 space-y-3">
                                 <div class="flex justify-between items-center">
                                     <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">🎮 9. Sınıf Quiz Arena</h4>
                                     <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">+20 XP</span>
                                 </div>
-                                <p id="q9-text" class="text-xs text-slate-200">Hücre zarında glikoprotein ve glikolipit moleküllerinin temel biyolojik görevi nedir?</p>
-                                <div id="q9-options" class="space-y-2">
-                                    <button onclick="answerQuiz(9, true, 'badge-1')" class="w-full text-left bg-navy-900 hover:bg-emerald-900/50 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">A) Hücreye özgüllük kazandırmak ve kimlik tanımını sağlamak</button>
-                                    <button onclick="answerQuiz(9, false, null)" class="w-full text-left bg-navy-900 hover:bg-red-900/30 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">B) Doğrudan yüksek miktarda ATP üretimi yapmak</button>
-                                </div>
+                                <p id="q9-title" class="text-xs text-slate-200 font-semibold"></p>
+                                <div id="q9-container" class="space-y-2"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-
             <!-- 10. SINIF MODÜLÜ -->
             <section id="content-sinif-10" class="hidden space-y-6">
                 <div class="glass-panel p-6 md:p-8 rounded-3xl border border-sky-500/30 relative overflow-hidden">
-                    <div class="absolute -right-32 -top-32 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none animate-glow"></div>
-
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                        <div>
-                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest bg-sky-950/80 px-3 py-1.5 rounded-xl border border-sky-500/30">10. Sınıf Maarif Modeli</span>
-                            <h2 class="text-3xl md:text-4xl font-black text-white mt-3">ATP Yapısı, Hücresel Enerji & Solunum Evreleri</h2>
-                            <p class="text-slate-300 text-sm mt-1 max-w-2xl">Sinir hücrelerinin yüksek enerji gereksinimini karşılayan hücresel solunum ve mitokondriyal ATP sentez süreçleri.</p>
-                        </div>
-                    </div>
-
+                    <h2 class="text-3xl md:text-4xl font-black text-white mb-4">10. Sınıf: ATP Yapısı, Hücresel Enerji & Solunum</h2>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Detaylı Konu Anlatımı (En az 5 Cümle) -->
-                        <div class="glass-panel p-6 rounded-2xl border border-slate-700/80 space-y-4">
-                            <h3 class="text-lg font-bold text-sky-400">⚡ ATP ve Hücresel Solunum Anlatımı (5 Cümle)</h3>
-                            <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
-                                <p><strong class="text-emerald-400">1. ATP'nin Biyolojik Yapısı:</strong> Adenin trifosfat (ATP); adenin organik bazı, beş karbonlu riboz şekeri ve birbirine yüksek enerjili bağlarla bağlı üç fosfat grubundan oluşur.</p>
-                                <p><strong class="text-emerald-400">2. Glikoliz Aşaması:</strong> Hücresel solunumun ilk evresi olan glikoliz, tüm canlılarda ortak olarak sitoplazmada gerçekleşir ve glikoz pirüvata kadar yıkılarak net 2 ATP sentezlenir.</p>
-                                <p><strong class="text-emerald-400">3. Krebs Döngüsü Reaksiyonları:</strong> Oksijen varlığında mitokondri matriksine geçen pirüvat, asetil-CoA'ya dönüşerek Krebs döngüsünü başlatır ve karbondioksit açığa çıkarır.</p>
-                                <p><strong class="text-emerald-400">4. Elektron Taşıma Sistemi (ETS):</strong> Mitokondri kristasında bulunan ETS kompleksleri, NADH ve FADH2 moleküllerinden gelen elektronları oksijene aktararak en yüksek ATP verimini sağlar.</p>
-                                <p><strong class="text-emerald-400">5. Sinir Hücrelerinin Enerji Bağımlılığı:</strong> Nöronlar enerji kaynağı olarak öncelikli olarak glikozu kullanırlar ve oksijensiz kaldıklarında ATP üretemedikleri için kısa sürede canlılıklarını kaybederler.</p>
-                            </div>
+                        <div class="glass-panel p-6 rounded-2xl border border-slate-700/80 space-y-3 text-xs text-slate-300 leading-relaxed">
+                            <h3 class="text-lg font-bold text-sky-400 mb-2">⚡ ATP ve Hücresel Solunum Anlatımı (5 Cümle)</h3>
+                            <p><strong class="text-emerald-400">1. ATP'nin Biyolojik Yapısı:</strong> Adenin trifosfat (ATP); adenin organik bazı, beş karbonlu riboz şekeri ve birbirine yüksek enerjili bağlarla bağlı üç fosfat grubundan oluşur.</p>
+                            <p><strong class="text-emerald-400">2. Glikoliz Aşaması:</strong> Hücresel solunumun ilk evresi olan glikoliz, tüm canlılarda ortak olarak sitoplazmada gerçekleşir ve glikoz pirüvata kadar yıkılarak net 2 ATP sentezlenir.</p>
+                            <p><strong class="text-emerald-400">3. Krebs Döngüsü Reaksiyonları:</strong> Oksijen varlığında mitokondri matriksine geçen pirüvat, asetil-CoA'ya dönüşerek Krebs döngüsünü başlatır ve karbondioksit açığa çıkarır.</p>
+                            <p><strong class="text-emerald-400">4. Elektron Taşıma Sistemi (ETS):</strong> Mitokondri kristasında bulunan ETS kompleksleri, NADH ve FADH2 moleküllerinden gelen elektronları oksijene aktararak en yüksek ATP verimini sağlar.</p>
+                            <p><strong class="text-emerald-400">5. Sinir Hücrelerinin Enerji Bağımlılığı:</strong> Nöronlar enerji kaynağı olarak öncelikli olarak glikozu kullanırlar ve oksijensiz kaldıklarında ATP üretemedikleri için kısa sürede canlılıklarını kaybederler.</p>
                         </div>
 
-                        <!-- Quiz Arena 10 -->
-                        <div class="glass-panel p-6 rounded-2xl border border-sky-500/30 bg-sky-950/20 space-y-3 flex flex-col justify-between">
-                            <div>
-                                <div class="flex justify-between items-center mb-2">
-                                    <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider">🎮 10. Sınıf Quiz Arena</h4>
-                                    <span class="text-[10px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded">+30 XP</span>
-                                </div>
-                                <p id="q10-text" class="text-xs text-slate-200 mb-3">Oksijenli solunumun hangi evresi tüm canlı organizmalarda ortak olarak sitoplazmada gerçekleşir?</p>
+                        <div id="quiz-box-10" class="glass-panel p-6 rounded-2xl border border-sky-500/30 bg-sky-950/20 space-y-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider">🎮 10. Sınıf Quiz Arena</h4>
+                                <span class="text-[10px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded">+30 XP</span>
                             </div>
-                            <div id="q10-options" class="space-y-2">
-                                <button onclick="answerQuiz(10, true, 'badge-2')" class="w-full text-left bg-navy-900 hover:bg-sky-900/50 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">A) Glikoliz Evresi</button>
-                                <button onclick="answerQuiz(10, false, null)" class="w-full text-left bg-navy-900 hover:bg-red-900/30 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">B) Elektron Taşıma Sistemi (ETS)</button>
-                            </div>
+                            <p id="q10-title" class="text-xs text-slate-200 font-semibold"></p>
+                            <div id="q10-container" class="space-y-2"></div>
                         </div>
                     </div>
                 </div>
@@ -248,80 +215,50 @@
             <!-- 11. SINIF MAARİF MODELİ MODÜLÜ -->
             <section id="content-sinif-11" class="hidden space-y-6">
                 <div class="glass-panel p-6 md:p-8 rounded-3xl border border-emerald-500/30 relative overflow-hidden">
-                    <div class="absolute -right-32 -bottom-32 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none animate-glow"></div>
-
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                        <div>
-                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-950/80 px-3 py-1.5 rounded-xl border border-emerald-500/30">11. Sınıf Maarif Modeli</span>
-                            <h2 class="text-3xl md:text-4xl font-black text-white mt-3">Nöron Yapısı, Reseptörler, MSS & İmpuls İletimi</h2>
-                            <p class="text-slate-300 text-sm mt-1 max-w-2xl">Beyin anatomisi, omurilik, reseptör çeşitleri, zar potansiyeli (-70mV), nörotransmitterler ve glia hücreleri.</p>
-                        </div>
-                    </div>
-
-                    <!-- 3D Modeller Grid -->
+                    <h2 class="text-3xl md:text-4xl font-black text-white mb-4">11. Sınıf: Nöron Yapısı, Reseptörler, MSS & İmpuls</h2>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                        <div class="h-[380px] glass-panel rounded-2xl overflow-hidden relative border border-slate-700/80 shadow-2xl glass-panel-hover">
-                            <iframe title="Neuron 3D Model" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/d2a2dedec2f846cf9a04cb1969e40782/embed?autostart=1&ui_controls=1&ui_infos=0"></iframe>
-                            <div class="absolute top-3 left-3 bg-navy-950/90 px-3 py-1 rounded-lg text-xs font-bold text-emerald-400 border border-emerald-500/30">
-                                Nöron Yapısı & Miyelin Kılıf (3D)
-                            </div>
+                        <div class="h-[380px] glass-panel rounded-2xl overflow-hidden relative border border-slate-700/80 shadow-2xl">
+                            <iframe title="Neuron 3D Model" src="https://sketchfab.com/models/d2a2dedec2f846cf9a04cb1969e40782/embed?autostart=1&ui_controls=1&ui_infos=0"></iframe>
                         </div>
-
-                        <div class="h-[380px] glass-panel rounded-2xl overflow-hidden relative border border-slate-700/80 shadow-2xl glass-panel-hover">
-                            <iframe title="Human Brain Cerebrum Brainstem" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/0aa0e33c5c854d1bab7bac9e1c7acaec/embed?autostart=1&ui_controls=1&ui_infos=0"></iframe>
-                            <div class="absolute top-3 left-3 bg-navy-950/90 px-3 py-1 rounded-lg text-xs font-bold text-sky-400 border border-sky-500/30">
-                                İnsan Beyni & MSS (3D)
-                            </div>
+                        <div class="h-[380px] glass-panel rounded-2xl overflow-hidden relative border border-slate-700/80 shadow-2xl">
+                            <iframe title="Human Brain Cerebrum Brainstem" src="https://sketchfab.com/models/0aa0e33c5c854d1bab7bac9e1c7acaec/embed?autostart=1&ui_controls=1&ui_infos=0"></iframe>
                         </div>
                     </div>
 
-                    <!-- Detaylı Konu Kartları (Her biri en az 5 cümle) -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                        <div class="glass-panel p-4 rounded-xl border border-slate-700/80 space-y-2">
-                            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wide">🧠 MSS ve Beyin Bölgeleri (5 Cümle)</h3>
-                            <p class="text-xs text-slate-300 leading-relaxed">
-                                1. Merkezi Sinir Sistemi; beyin ve omurilik olmak üzere iki temel organdan oluşur.<br>
-                                2. Uç beyin, istemli kas hareketlerini, zeka, hafıza ve beş duyu organından gelen uyarıları kontrol eder.<br>
-                                3. Ara beyinde yer alan talamus duyuları toplarken, hipotalamus vücut sıcaklığı ve su dengesi gibi homeostazik olayları düzenler.<br>
-                                4. Beyincik vücudun dengesini ve kas koordinasyonunu sağlarken, omurilik soğanı solunum ve dolaşım gibi yaşamsal refleksleri yürütür.<br>
-                                5. Omurilik ise çevresel sinir sistemi ile beyin arasındaki iletişimi kurar ve kazanılmış refleksleri yönetir.
-                            </p>
+                        <div class="glass-panel p-4 rounded-xl border border-slate-700/80 space-y-2 text-xs text-slate-300 leading-relaxed">
+                            <h3 class="font-bold text-emerald-400 uppercase">🧠 MSS ve Beyin Bölgeleri (5 Cümle)</h3>
+                            <p>1. Merkezi Sinir Sistemi; beyin ve omurilik olmak üzere iki temel organdan oluşur.</p>
+                            <p>2. Uç beyin, istemli kas hareketlerini, zeka, hafıza ve beş duyu organından gelen uyarıları kontrol eder.</p>
+                            <p>3. Ara beyinde yer alan talamus duyuları toplarken, hipotalamus vücut sıcaklığı ve su dengesini düzenler.</p>
+                            <p>4. Beyincik dengeden sorumluyken omurilik soğanı solunum ve dolaşım reflekslerini yürütür.</p>
+                            <p>5. Omurilik ise çevresel sinir sistemi ile beyin arasındaki iletişimi kurar ve refleksleri yönetir.</p>
                         </div>
-
-                        <div class="glass-panel p-4 rounded-xl border border-slate-700/80 space-y-2">
-                            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wide">⚡ Reseptörler & Glia Hücreleri (5 Cümle)</h3>
-                            <p class="text-xs text-slate-300 leading-relaxed">
-                                1. Dış ortamdan gelen uyarıları alan özelleşmiş hücrelere reseptör adı verilir.<br>
-                                2. Kemoreseptörler kimyasal, mekanoreseptörler fiziki temas, termoreseptörler ısı, fotoreseptörler ise ışık uyarılarını algılar.<br>
-                                3. Nöronlara desteklik sağlayan ve onları koruyan yardımcı hücrelere glia (nöroglia) hücreleri denir.<br>
-                                4. Oligodendrositler MSS'de, Schwann hücreleri ise ÇSB'de aksonların etrafında miyelin kılıf oluşturur.<br>
-                                5. Mikroglialar fagositoz yaparak sinir sistemini mikroplardan korurken astrositler kan-beyin bariyerini oluşturur.
-                            </p>
+                        <div class="glass-panel p-4 rounded-xl border border-slate-700/80 space-y-2 text-xs text-slate-300 leading-relaxed">
+                            <h3 class="font-bold text-emerald-400 uppercase">⚡ Reseptörler & Glia (5 Cümle)</h3>
+                            <p>1. Dış ortamdan gelen uyarıları alan özelleşmiş hücrelere reseptör adı verilir.</p>
+                            <p>2. Kemoreseptör, mekanoreseptör, termoreseptör, ağrı ve fotoreseptör çeşitleri bulunur.</p>
+                            <p>3. Nöronlara desteklik sağlayan ve koruyan hücrelere glia hücreleri denir.</p>
+                            <p>4. Oligodendrositler MSS'de, Schwann hücreleri ise ÇSB'de miyelin kılıf oluşturur.</p>
+                            <p>5. Mikroglialar bağışıklık sağlarken astrositler kan-beyin bariyerini oluşturur.</p>
                         </div>
-
-                        <div class="glass-panel p-4 rounded-xl border border-slate-700/80 space-y-2">
-                            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wide">🧪 Zar Potansiyeli & İmpuls (5 Cümle)</h3>
-                            <p class="text-xs text-slate-300 leading-relaxed">
-                                1. Nöronlarda dinlenme halindeki elektrik yük farkına polarizasyon (-70mV) adı verilir.<br>
-                                2. Polarizasyonda Na+/K+ pompası aktif taşıma ile sodyumu dışarıda, potasyumu içeride tutar.<br>
-                                3. Eşik değeri aşan bir uyarı geldiğinde Na+ kapıları açılır ve Na+ içeri girerek depolarizasyon (+40mV) gerçekleşir.<br>
-                                4. Depolarizasyonun ardından K+ kapıları açılır ve K+ dışarı çıkarak hücre tekrar negatifleşir (repolarizasyon).<br>
-                                5. Sinapslarda impuls iletimi Serotonin, Dopamin, Epinefrin ve Norepinefrin gibi nörotransmitter maddelerle kimyasal olarak sağlanır.
-                            </p>
+                        <div class="glass-panel p-4 rounded-xl border border-slate-700/80 space-y-2 text-xs text-slate-300 leading-relaxed">
+                            <h3 class="font-bold text-emerald-400 uppercase">🧪 Zar Potansiyeli & İmpuls (5 Cümle)</h3>
+                            <p>1. Nöronlarda dinlenme halindeki elektrik yük farkına polarizasyon (-70mV) denir.</p>
+                            <p>2. Polarizasyonda Na+/K+ pompası sodyumu dışarıda, potasyumu içeride tutar.</p>
+                            <p>3. Eşik değeri aşan uyarıda Na+ kapıları açılır ve depolarizasyon (+40mV) gerçekleşir.</p>
+                            <p>4. Depolarizasyonun ardından K+ kapıları açılır ve repolarizasyon yaşanır.</p>
+                            <p>5. Sinapslarda impuls iletimi Serotonin ve Dopamin gibi nörotransmitterlerle kimyasal sağlanır.</p>
                         </div>
                     </div>
 
-                    <!-- Quiz Arena 11 -->
-                    <div class="glass-panel p-6 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 space-y-3">
-                        <div class="flex justify-between items-center">
+                    <div id="quiz-box-11" class="glass-panel p-6 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 space-y-3">
+                        <div class="flex justify-between items-center mb-2">
                             <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">🎮 11. Sınıf Quiz Arena</h4>
                             <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">+40 XP</span>
                         </div>
-                        <p id="q11-text" class="text-xs text-slate-200">Nöronda depolarizasyon gerçekleşirken zar üzerinde meydana gelen temel elektriksel ve iyonik değişim nedir?</p>
-                        <div id="q11-options" class="space-y-2">
-                            <button onclick="answerQuiz(11, true, 'badge-3')" class="w-full text-left bg-navy-900 hover:bg-emerald-900/50 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">A) Na+ kapıları açılır, Na+ içeri girer ve hücre içi pozitifleşir</button>
-                            <button onclick="answerQuiz(11, false, null)" class="w-full text-left bg-navy-900 hover:bg-red-900/30 border border-slate-700/80 p-2.5 rounded-xl text-xs transition">B) K+ kapıları açılır ve hücre içi daha negatif seviyeye düşer</button>
-                        </div>
+                        <p id="q11-title" class="text-xs text-slate-200 font-semibold"></p>
+                        <div id="q11-container" class="space-y-2"></div>
                     </div>
                 </div>
             </section>
@@ -329,208 +266,231 @@
             <!-- BAĞLAM TEMELLİ DENEY & MİNİ SINAV MODÜLÜ -->
             <section id="content-baglam" class="hidden space-y-6">
                 <div class="glass-panel p-6 md:p-8 rounded-3xl border border-sky-500/40 relative overflow-hidden">
-                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-                    <div class="max-w-3xl mb-6">
-                        <span class="text-xs font-bold text-sky-400 uppercase tracking-widest bg-sky-950/80 px-3 py-1.5 rounded-xl border border-sky-500/30">Disiplinlerarası Deney & Sınav Laboratuvarı</span>
-                        <h2 class="text-3xl md:text-4xl font-black text-white mt-3">Bağlam Temelli Deney ve Mini Sınav Arenası</h2>
-                        <p class="text-slate-300 text-sm mt-1">Gerçek biyolojik deneyleri, günlük hayat örneklerini ve vaka analizlerini inceleyin. Soruları çözerek mini sınavı tamamlayın!</p>
-                    </div>
+                    <h2 class="text-3xl md:text-4xl font-black text-white mb-2">Bağlam Temelli Deney ve Mini Sınav Arenası</h2>
+                    <p class="text-slate-300 text-sm mb-6">Aşağıdaki deneyleri ve günlük hayat örneklerini inceleyin. Soruları çözüp mini sınavı tamamlayın.</p>
 
                     <!-- DENEY SIMÜLASYONU 1 -->
                     <div class="glass-panel p-6 rounded-2xl border border-emerald-500/30 space-y-4 mb-8">
-                        <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-800 pb-3">
-                            <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">🧪 Deney 1: Maraton Koşusunda Na+/K+ Pompası ve İyon Değişimi</h3>
-                            <span class="text-xs bg-emerald-950 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-lg">Mini Sınav (3 Soru)</span>
-                        </div>
-
-                        <!-- Deney Düzeneği ve Günlük Hayat Örneği -->
+                        <h3 class="text-lg font-bold text-emerald-400">🧪 Deney 1: Maraton Koşusunda Na+/K+ Pompası ve İyon Değişimi</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
-                            <div class="bg-navy-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2">
-                                <h4 class="font-bold text-sky-400">📊 Deney Düzeneği & Veriler:</h4>
-                                <p>Laboratuvarda bir maraton koşucusundan alınan motor nöronlar incelenmiştir. Yoğun egzersiz sırasında nöron hücre içi ATP seviyesinin %40 düştüğü ve Na+/K+ pompasının yavaşladığı tespit edilmiştir. Ancak mitokondriyal O2 tüketimi 3 katına çıktığında ATP seviyesi dengelenmiştir.</p>
+                            <div class="bg-navy-900/90 p-4 rounded-xl border border-slate-700/80">
+                                <h4 class="font-bold text-sky-400 mb-1">📊 Deney Verisi:</h4>
+                                <p>Egzersiz sırasında nöron içi ATP seviyesi düşer ve Na+/K+ pompası yavaşlar. O2 tüketimi arttığında ATP dengelenir.</p>
                             </div>
-                            <div class="bg-navy-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2">
-                                <h4 class="font-bold text-emerald-400">🏃 Günlük Hayat Örneği:</h4>
-                                <p>Uzun süre koşan bir sporcunun bacaklarında kramp oluşması veya tepki süresinin uzaması, nöronlardaki Na+/K+ pompasının yeterli ATP bulamaması ve repolarizasyonun gecikmesiyle doğrudan ilgilidir.</p>
+                            <div class="bg-navy-900/90 p-4 rounded-xl border border-slate-700/80">
+                                <h4 class="font-bold text-emerald-400 mb-1">🏃 Günlük Hayat Örneği:</h4>
+                                <p>Maraton koşucularında kas krampları oluşması, Na+/K+ pompasının ATP yetersizliği nedeniyle polarizasyonu geciktirmesindendir.</p>
                             </div>
                         </div>
 
-                        <!-- MİNİ SINAV 1 SORULARI -->
-                        <div class="space-y-4 pt-2">
-                            <div class="bg-navy-950/60 p-4 rounded-xl border border-slate-800 space-y-2">
-                                <p class="text-xs font-bold text-white">Soru 1: Deneyde O2 tüketimi arttığında Na+/K+ pompasının tekrar hızlanmasının temel sebebi nedir?</p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                    <button onclick="checkExamStep('exp1-1', true)" id="btn-exp1-1-a" class="text-left bg-navy-900 hover:bg-emerald-900/40 p-2.5 rounded-lg text-xs border border-slate-700 transition">A) Oksijenli solunumla ATP üretiminin artması</button>
-                                    <button onclick="checkExamStep('exp1-1', false)" id="btn-exp1-1-b" class="text-left bg-navy-900 hover:bg-red-900/30 p-2.5 rounded-lg text-xs border border-slate-700 transition">B) Hücre zarının kalınlaşması</button>
-                                </div>
-                            </div>
-
-                            <div class="bg-navy-950/60 p-4 rounded-xl border border-slate-800 space-y-2">
-                                <p class="text-xs font-bold text-white">Soru 2: Sporcunun kramp yaşaması hangi zar potansiyeli aşamasındaki aksamadan kaynaklanır?</p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                    <button onclick="checkExamStep('exp1-2', true)" id="btn-exp1-2-a" class="text-left bg-navy-900 hover:bg-emerald-900/40 p-2.5 rounded-lg text-xs border border-slate-700 transition">A) Polarizasyonun (dinlenme durumunun) yeniden kurulamaması</button>
-                                    <button onclick="checkExamStep('exp1-2', false)" id="btn-exp1-2-b" class="text-left bg-navy-900 hover:bg-red-900/30 p-2.5 rounded-lg text-xs border border-slate-700 transition">B) Fotoreseptörlerin aşırı uyarılması</button>
-                                </div>
-                            </div>
-                        </div>
+                        <div id="exam-container-1" class="space-y-4 pt-2"></div>
                     </div>
 
                     <!-- DENEY SİMÜLASYONU 2 -->
                     <div class="glass-panel p-6 rounded-2xl border border-sky-500/30 space-y-4">
-                        <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-800 pb-3">
-                            <h3 class="text-lg font-bold text-sky-400 flex items-center gap-2">🧪 Deney 2: Sinaptik Boşlukta Nörotransmitter Bloke Deneyi</h3>
-                            <span class="text-xs bg-sky-950 text-sky-300 border border-sky-500/30 px-3 py-1 rounded-lg">Mini Sınav (2 Soru)</span>
-                        </div>
-
-                        <!-- Deney Düzeneği ve Günlük Hayat Örneği -->
+                        <h3 class="text-lg font-bold text-sky-400">🧪 Deney 2: Sinaptik Boşlukta Nörotransmitter Bloke Deneyi</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
-                            <div class="bg-navy-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2">
-                                <h4 class="font-bold text-sky-400">🔬 Deney Düzeneği & Veriler:</h4>
-                                <p>Bir kurbağa refleks hazırlığında sinaptik boşluğa botulinum toksini (botoks maddesi) enjekte edilmiştir. Asetilkolin nörotransmitter maddesinin salınımının durduğu ve impulsun komşu nörona geçemediği gözlemlenmiştir.</p>
+                            <div class="bg-navy-900/90 p-4 rounded-xl border border-slate-700/80">
+                                <h4 class="font-bold text-sky-400 mb-1">🔬 Deney Verisi:</h4>
+                                <p>Botulinum toksini enjekte edilen sinapsta asetilkolin salınımı durmuş ve impuls karşı tarafa geçememiştir.</p>
                             </div>
-                            <div class="bg-navy-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2">
-                                <h4 class="font-bold text-emerald-400">☕ Günlük Hayat Örneği:</h4>
-                                <p>Kahve içtiğimizde kafeinin reseptörleri bağlayarak uykusuzluk hissi yaratması veya lokal anestezik maddelerin ameliyat bölgesindeki ağrı reseptörlerini bloke etmesi sinaptik iletimin engellenmesine örnektir.</p>
+                            <div class="bg-navy-900/90 p-4 rounded-xl border border-slate-700/80">
+                                <h4 class="font-bold text-emerald-400 mb-1">☕ Günlük Hayat Örneği:</h4>
+                                <p>Diş çekiminde lokal anestezi yapılması, ağrı reseptörleri ve duyu nöronlarındaki iletimin kimyasal olarak bloke edilmesidir.</p>
                             </div>
                         </div>
 
-                        <!-- MİNİ SINAV 2 SORULARI -->
-                        <div class="space-y-4 pt-2">
-                            <div class="bg-navy-950/60 p-4 rounded-xl border border-slate-800 space-y-2">
-                                <p class="text-xs font-bold text-white">Soru 1: Sinaptik boşlukta nörotransmitter madde salgılanamazsa impuls iletimine ne olur?</p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                    <button onclick="checkExamStep('exp2-1', true)" id="btn-exp2-1-a" class="text-left bg-navy-900 hover:bg-emerald-900/40 p-2.5 rounded-lg text-xs border border-slate-700 transition">A) İmpuls kimyasal olarak karşı nörona aktarılamaz ve durur</button>
-                                    <button onclick="checkExamStep('exp2-1', false)" id="btn-exp2-1-b" class="text-left bg-navy-900 hover:bg-red-900/30 p-2.5 rounded-lg text-xs border border-slate-700 transition">B) İmpuls hızı 10 katına çıkar</button>
-                                </div>
-                            </div>
-
-                            <div class="bg-navy-950/60 p-4 rounded-xl border border-slate-800 space-y-2">
-                                <p class="text-xs font-bold text-white">Soru 2: Diş tedavisinde uygulanan lokal anestezi hangi yapının işlevini geçici olarak durdurur?</p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                    <button onclick="checkExamStep('exp2-2', true)" id="btn-exp2-2-a" class="text-left bg-navy-900 hover:bg-emerald-900/40 p-2.5 rounded-lg text-xs border border-slate-700 transition">A) Ağrı reseptörleri ve duyu nöronlarının impuls iletimini</button>
-                                    <button onclick="checkExamStep('exp2-2', false)" id="btn-exp2-2-b" class="text-left bg-navy-900 hover:bg-red-900/30 border border-slate-700 transition">B) Beyincikteki denge merkezini</button>
-                                </div>
-                            </div>
-                        </div>
+                        <div id="exam-container-2" class="space-y-4 pt-2"></div>
 
                         <div class="pt-4 border-t border-slate-800 text-center">
                             <button onclick="submitFinalExam()" class="bg-gradient-to-r from-emerald-600 to-sky-600 hover:from-emerald-500 hover:to-sky-500 text-white font-black py-3 px-8 rounded-xl text-xs transition shadow-xl">
-                                📝 Mini Sınavı Tamamla ve Sonucu Onayla (+100 XP)
+                                📝 Mini Sınav Sonucunu Onayla ve XP Kazan
                             </button>
                         </div>
                     </div>
                 </div>
             </section>
-
         </main>
 
-        <!-- FOOTER / ALT BİLGİ -->
-        <footer class="glass-panel border-t border-emerald-500/20 py-8 text-center text-xs text-slate-400 mt-12">
-            <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="flex items-center gap-3">
-                    <span class="font-black text-emerald-400 text-sm">Nasse Biology</span>
-                    <span class="text-slate-600">•</span>
-                    <span class="text-sky-300 font-semibold">-Los Galacticos-</span>
-                    <span class="text-slate-600">•</span>
-                    <span class="text-emerald-300 font-semibold">-Barış Köseoğlu-</span>
-                </div>
-                <p class="text-slate-500">Biyoloji Eğitimi için Etkileşimli 3D Oyun Platformu &copy; 2026</p>
-            </div>
+        <footer class="glass-panel border-t border-emerald-500/20 py-6 text-center text-xs text-slate-400 mt-12">
+            Nasse Biology &copy; 2026 | -Los Galacticos- | -Barış Köseoğlu-
         </footer>
     </div>
 
-    <!-- JAVASCRIPT / SKOR VE MİNİ SINAV MANTIĞI -->
+    <!-- JAVASCRIPT: DİNAMİK SORU, ŞIK KARIŞTIRMA VE KİLİTLEME SİSTEMİ -->
     <script>
         let totalScore = 0;
-        let examProgress = {
-            'exp1-1': false,
-            'exp1-2': false,
-            'exp2-1': false,
-            'exp2-2': false
+        let answeredQuestions = {};
+
+        // Soru Bankası (Rastgele Şık Dağılımı ve Kilit Yönetimi İçin)
+        const quizData = {
+            9: {
+                title: "Hücre zarında glikoprotein ve glikolipit moleküllerinin temel biyolojik görevi nedir?",
+                options: [
+                    { text: "Hücreye özgüllük kazandırmak ve kimlik tanımını sağlamak", correct: true },
+                    { text: "Doğrudan yüksek miktarda ATP üretimi yapmak", correct: false },
+                    { text: "Hücreyi virüslere karşı tamamen korumak", correct: false },
+                    { text: "DNA kopyalanmasını hızlandırmak", correct: false }
+                ],
+                badge: 'badge-1',
+                points: 20
+            },
+            10: {
+                title: "Oksijenli solunumun hangi evresi tüm canlı organizmalarda ortak olarak sitoplazmada gerçekleşir?",
+                options: [
+                    { text: "Krebs Döngüsü", correct: false },
+                    { text: "Glikoliz Evresi", correct: true },
+                    { text: "Elektron Taşıma Sistemi (ETS)", correct: false },
+                    { text: "Pirüvat Oksidasyonu", correct: false }
+                ],
+                badge: 'badge-2',
+                points: 30
+            },
+            11: {
+                title: "Nöronda depolarizasyon gerçekleşirken zar üzerinde meydana gelen temel elektriksel ve iyonik değişim nedir?",
+                options: [
+                    { text: "K+ kapıları açılır ve hücre içi -90mV seviyesine düşer", correct: false },
+                    { text: "Na+ kapıları açılır, Na+ içeri girer ve hücre içi pozitifleşir (+40mV)", correct: true },
+                    { text: "ATP tüketimi tamamen durur", correct: false },
+                    { text: "Miyelin kılıf eriyerek kaybolur", correct: false }
+                ],
+                badge: 'badge-3',
+                points: 40
+            }
         };
 
-        function updateScore(points) {
-            totalScore += points;
-            document.getElementById('global-score').innerText = totalScore + " XP";
-            
-            const titleElem = document.getElementById('player-title');
-            if (totalScore >= 150) {
-                titleElem.innerText = "Biyoloji Efsanesi 👑";
-                titleElem.className = "text-amber-400 font-black text-xs bg-amber-950 px-2 py-1 rounded-lg border border-amber-500/40 animate-pulse";
-            } else if (totalScore >= 90) {
-                titleElem.innerText = "Sinir Bilimci 🧠";
-                titleElem.className = "text-emerald-400 font-black text-xs bg-emerald-950 px-2 py-1 rounded-lg border border-emerald-500/40";
-            } else if (totalScore >= 30) {
-                titleElem.innerText = "Enerji Uzmanı ⚡";
-                titleElem.className = "text-sky-400 font-black text-xs bg-sky-950 px-2 py-1 rounded-lg border border-sky-500/40";
+        const examData = {
+            "exp1-1": {
+                title: "Soru 1: Deneyde O2 tüketimi arttığında Na+/K+ pompasının tekrar hızlanmasının temel sebebi nedir?",
+                options: [
+                    { text: "Oksijenli solunumla ATP üretiminin artması", correct: true },
+                    { text: "Hücre zarının kalınlaşması", correct: false },
+                    { text: "Kılcal damarların büzülmesi", correct: false }
+                ]
+            },
+            "exp1-2": {
+                title: "Soru 2: Sporcunun kramp yaşaması hangi zar potansiyeli aşamasındaki aksamadan kaynaklanır?",
+                options: [
+                    { text: "Polarizasyonun (dinlenme durumunun) yeniden kurulamaması", correct: true },
+                    { text: "Fotoreseptörlerin aşırı uyarılması", correct: false },
+                    { text: "Duyu nöronlarının yok olması", correct: false }
+                ]
+            },
+            "exp2-1": {
+                title: "Soru 1: Sinaptik boşlukta nörotransmitter madde salgılanamazsa impuls iletimine ne olur?",
+                options: [
+                    { text: "İmpuls hızı 10 katına çıkar", correct: false },
+                    { text: "İmpuls kimyasal olarak karşı nörona aktarılamaz ve durur", correct: true },
+                    { text: "Nöron derhal bölünmeye başlar", correct: false }
+                ]
+            },
+            "exp2-2": {
+                title: "Soru 2: Diş tedavisinde uygulanan lokal anestezi hangi yapının işlevini geçici olarak durdurur?",
+                options: [
+                    { text: "Ağrı reseptörleri ve duyu nöronlarının impuls iletimini", correct: true },
+                    { text: "Beyincikteki denge merkezini", correct: false },
+                    { text: "Omurilik soğanının solunum merkezini", correct: false }
+                ]
             }
+        };
+
+        // Diziyi Karıştırma Algoritması (Fisher-Yates Shuffle)
+        function shuffleArray(array) {
+            let shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
         }
 
-        function unlockBadge(badgeId) {
-            if(badgeId) {
-                const badge = document.getElementById(badgeId);
-                if(badge) {
-                    badge.classList.remove('opacity-40', 'grayscale');
-                    badge.classList.add('border-emerald-500', 'bg-emerald-950/80', 'text-emerald-300', 'shadow-md');
-                }
-            }
-        }
+        // Soruları Render Etme (Her Seferinde Farklı Şık Dizilimi Yaparak)
+        function renderQuizzes() {
+            [9, 10, 11].forEach(level => {
+                const data = quizData[level];
+                document.getElementById(`q${level}-title`).innerText = data.title;
+                const container = document.getElementById(`q${level}-container`);
+                container.innerHTML = '';
 
-        function switchTab(tabId) {
-            document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
-            
-            const targetSection = document.getElementById('content-' + tabId);
-            if(targetSection) targetSection.classList.remove('hidden');
+                const shuffledOptions = shuffleArray(data.options);
+                const letters = ['A', 'B', 'C', 'D'];
 
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 whitespace-nowrap bg-navy-800 text-slate-300 hover:text-white hover:bg-slate-800";
+                shuffledOptions.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = `q-btn-${level} w-full text-left bg-navy-900 hover:bg-emerald-900/40 p-2.5 rounded-xl text-xs border border-slate-700 transition`;
+                    btn.innerText = `${letters[idx]}) ${opt.text}`;
+                    btn.onclick = () => handleQuizAnswer(level, opt.correct, btn);
+                    container.appendChild(btn);
+                });
             });
-
-            const activeBtn = document.getElementById('tab-' + tabId);
-            if(activeBtn) {
-                if(tabId === 'baglam') {
-                    activeBtn.className = "tab-btn px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 whitespace-nowrap bg-sky-600 text-white shadow-lg shadow-sky-900/50 scale-105";
-                } else {
-                    activeBtn.className = "tab-btn px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2.5 whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-900/50 scale-105";
-                }
-            }
         }
 
-        function answerQuiz(level, isCorrect, badgeId) {
-            if(isCorrect) {
-                const points = level === 9 ? 20 : (level === 10 ? 30 : 40);
-                updateScore(points);
-                unlockBadge(badgeId);
-                alert("🎉 TEBRİKLER! Doğru Cevap.\n\n+" + points + " XP Kazandınız!");
+        function renderExams() {
+            const renderGroup = (keys, containerId) => {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                keys.forEach(key => {
+                    const data = examData[key];
+                    const box = document.createElement('div');
+                    box.className = "bg-navy-950/60 p-4 rounded-xl border border-slate-800 space-y-2";
+                    
+                    const title = document.createElement('p');
+                    title.className = "text-xs font-bold text-white";
+                    title.innerText = data.title;
+                    box.appendChild(title);
+
+                    const grid = document.createElement('div');
+                    grid.className = "grid grid-cols-1 gap-2";
+
+                    const shuffledOptions = shuffleArray(data.options);
+                    const letters = ['A', 'B', 'C'];
+
+                    shuffledOptions.forEach((opt, idx) => {
+                        const btn = document.createElement('button');
+                        btn.className = `exam-btn-${key} text-left bg-navy-900 hover:bg-emerald-900/40 p-2.5 rounded-lg text-xs border border-slate-700 transition`;
+                        btn.innerText = `${letters[idx]}) ${opt.text}`;
+                        btn.onclick = () => handleExamAnswer(key, opt.correct, btn);
+                        grid.appendChild(btn);
+                    });
+
+                    box.appendChild(grid);
+                    container.appendChild(box);
+                });
+            };
+
+            renderGroup(['exp1-1', 'exp1-2'], 'exam-container-1');
+            renderGroup(['exp2-1', 'exp2-2'], 'exam-container-2');
+        }
+
+        // Quiz Cevaplama Mantığı (Kilitli & Tek Kullanımlık)
+        function handleQuizAnswer(level, isCorrect, clickedBtn) {
+            if (answeredQuestions[`quiz-${level}`]) {
+                alert("⚠️ Bu soruyu zaten yanıtladınız, tekrar cevap veremezsiniz!");
+                return;
+            }
+
+            if (isCorrect) {
+                answeredQuestions[`quiz-${level}`] = true;
+                clickedBtn.classList.remove('bg-navy-900', 'hover:bg-emerald-900/40');
+                clickedBtn.classList.add('bg-emerald-600', 'text-white', 'font-bold');
+                
+                // Diğer butonları kilitler
+                document.querySelectorAll(`.q-btn-${level}`).forEach(btn => btn.disabled = true);
+                
+                updateScore(quizData[level].points);
+                unlockBadge(quizData[level].badge);
+                alert(`🎉 TEBRİKLER! Doğru Cevap.\n\n+${quizData[level].points} XP Kazandınız!`);
             } else {
-                alert("❌ YANLIŞ CEVAP!\n\nKonu özetini tekrar okuyup yeniden deneyin.");
+                clickedBtn.classList.add('bg-red-900/60', 'border-red-500');
+                alert("❌ YANLIŞ CEVAP! Konu özetini tekrar inceleyip doğru şıkkı bulun.");
             }
         }
 
-        // MİNİ SINAV ADIM KONTROLÜ
-        function checkExamStep(stepId, isCorrect) {
-            if(isCorrect) {
-                examProgress[stepId] = true;
-                alert("✅ TEBRİKLER! Deney sorusunu doğru yanıtladınız.");
-            } else {
-                examProgress[stepId] = false;
-                alert("❌ YANLIŞ CEVAP! Deney düzeneğini ve günlük hayat örneğini tekrar okuyup deneyin.");
+        // Mini Sınav Cevaplama Mantığı
+        function handleExamAnswer(key, isCorrect, clickedBtn) {
+            if (answeredQuestions[`exam-${key}`]) {
+                alert("⚠️ Bu deney sorusunu zaten yanıtladınız!");
+                return;
             }
-        }
 
-        // MİNİ SINAV SONUÇ ONAYI
-        function submitFinalExam() {
-            const allCorrect = Object.values(examProgress).every(val => val === true);
-            if(allCorrect) {
-                updateScore(100);
-                unlockBadge('badge-4');
-                alert("🏆 TEBRİKLER! Deney ve Bağlam Temelli Mini Sınavı %100 Başarıyla Tamamladınız!\n\n+100 XP Kazandınız! 'Deney Ustası' Rozeti Açıldı!");
-            } else {
-                alert("⚠️ Sınav tamamlanamadı. Lütfen tüm deney sorularını doğru yanıtladığınızdan emin olun.");
-            }
-        }
-    </script>
-</body>
-</html>
-
+            if
